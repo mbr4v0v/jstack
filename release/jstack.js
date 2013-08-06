@@ -2740,20 +2740,21 @@ JSTACK.Glance = (function(JS, undefined) {
 
         onOK = function(result, headers) {
             if (callback !== undefined) {
-                var model = {};
-                var heads = headers.split("\r\n");
-                heads.forEach(function(head) {
-                    if (head.indexOf('x-image-meta') === -1) {
-                        return;
-                    }
-                    var reg = head.match(/^([\w\d\-\_]*)\: (.*)$/);
-                    var value = reg[1];
-                    var key = reg[2];
-                    var data = value.split('-');
-                    var attr = data[data.length - 1];
-                    model[attr] = key;
-                });
-                callback(model, headers);
+                // var model = {};
+                // var heads = headers.split("\r\n");
+                // heads.forEach(function(head) {
+                //     if (head.indexOf('x-image-meta') === -1) {
+                //         return;
+                //     }
+                //     var reg = head.match(/^([\w\d\-\_]*)\: (.*)$/);
+                //     var value = reg[1];
+                //     var key = reg[2];
+                //     var data = value.split('-');
+                //     var attr = data[data.length - 1];
+                //     model[attr] = key;
+                // });
+                // callback(model, headers);
+                callback(result);
             }
         };
         onError = function(message) {
@@ -2762,7 +2763,7 @@ JSTACK.Glance = (function(JS, undefined) {
             }
         };
 
-        JS.Comm.head(url, JS.Keystone.params.token, onOK, onError);
+        JS.Comm.get(url, JS.Keystone.params.token, onOK, onError);
     };
 
     // This operation updates details of the image specified by its `id`.
