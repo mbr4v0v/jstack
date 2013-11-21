@@ -627,7 +627,7 @@ JSTACK.Neutron = (function(JS, undefined) {
         JS.Comm.get(url, JS.Keystone.params.token, onOK, onError);
     };
 
-    createrouter = function(name, network_id, admin_state_up, tenant_id, callback, error) {
+    createrouter = function(name, admin_state_up, network_id, tenant_id, callback, error) {
         var url, onOK, onError, data;
         if (!check()) {
             return;
@@ -692,7 +692,7 @@ JSTACK.Neutron = (function(JS, undefined) {
         JS.Comm.get(url, JS.Keystone.params.token, onOK, onError);
     };
 
-    updaterouter = function(router_id, network_id, name, admin_state_up, tenant_id, callback, error) {
+    updaterouter = function(router_id, network_id, name, admin_state_up, callback, error) {
         var url, onOK, onError, data;
         if (!check()) {
             return;
@@ -717,10 +717,6 @@ JSTACK.Neutron = (function(JS, undefined) {
 
         if (admin_state_up !== undefined) {
             data.router.admin_state_up = admin_state_up;
-        }
-
-        if (tenant_id !== undefined) {
-            data.router.tenant_id = tenant_id;
         }
 
         onOK = function(result) {
@@ -758,7 +754,7 @@ JSTACK.Neutron = (function(JS, undefined) {
         JS.Comm.del(url, JS.Keystone.params.token, onOK, onError);
     };
 
-    addinterfacetorouter = function(router_id, subnet_id, port_id, tenant_id, callback, error) {
+    addinterfacetorouter = function(router_id, subnet_id, port_id, callback, error) {
         var url, onOK, onError, data;
         if (!check()) {
             return;
@@ -791,7 +787,7 @@ JSTACK.Neutron = (function(JS, undefined) {
         JS.Comm.put(url, data, JS.Keystone.params.token, onOK, onError);
     };
 
-    removeinterfacefromrouter = function(router_id, subnet_id, port_id, callback, error) {
+    removeinterfacefromrouter = function(router_id, port_id, subnet_id, callback, error) {
         var url, onOK, onError, data;
         if (!check()) {
             return;
